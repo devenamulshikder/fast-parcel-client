@@ -3,6 +3,11 @@
 @plugin "daisyui" {
   themes: light: --default;
 }
+@plugin "daisyui/theme" {
+  default: true;
+  --color-primary: #03373D;
+  --color-secondary: #606060;
+}
 .urbanist{
   font-family: "Urbanist", sans-serif;
   background-color: #EAECED;
