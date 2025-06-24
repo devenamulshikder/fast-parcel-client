@@ -1,4 +1,10 @@
-import { Banner, HowItWorks, OurServices } from "../../components";
+import {
+  Banner,
+  ClientLogos,
+  HowItWorks,
+  OurServices,
+  ServicesSection,
+} from "../../components";
 
 export const Home = () => {
   return (
@@ -6,6 +12,8 @@ export const Home = () => {
       <Banner />
       <HowItWorks />
       <OurServices />
+      <ClientLogos />
+      <ServicesSection />
     </div>
   );
 };

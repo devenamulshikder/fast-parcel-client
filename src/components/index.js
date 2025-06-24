@@ -3,3 +3,5 @@ export { Footer } from "./shared/Footer";
 export { Banner } from "./banner/Banner";
 export { HowItWorks } from "./howItWorks/HowItWorks";
 export { OurServices } from "./ourServices/OurServices";
+export { ClientLogos } from "./clientLogos/ClientLogos";
+export { ServicesSection } from "./servicesSection/ServicesSection";
