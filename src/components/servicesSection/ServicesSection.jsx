@@ -34,12 +34,13 @@ export const ServicesSection = () => {
               alt={service.title}
               className="w-32 h-32 object-contain"
             />
-            <div className="h-32 border-l border-dashed border-[#03464d95]"></div>
+            <div className="h-32 border-l border-dashed border-[#03464d95] hidden md:flex"></div>
+            <div className="border w-48 border-dashed border-[#03464d95] flex md:hidden"></div>
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-[#00333B]">
+              <h3 className="text-xl font-bold text-primary">
                 {service.title}
               </h3>
-              <p className="mt-2 text-sm text-gray-700">
+              <p className="mt-2 text-secondary font-medium text-[16px]">
                 {service.description}
               </p>
             </div>

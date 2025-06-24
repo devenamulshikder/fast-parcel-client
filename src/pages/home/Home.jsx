@@ -1,5 +1,6 @@
 import {
   Banner,
+  BeMerchant,
   ClientLogos,
   HowItWorks,
   OurServices,
@@ -14,6 +15,7 @@ export const Home = () => {
       <OurServices />
       <ClientLogos />
       <ServicesSection />
+      <BeMerchant />
     </div>
   );
 };

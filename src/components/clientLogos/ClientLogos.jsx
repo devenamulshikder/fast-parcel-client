@@ -10,7 +10,7 @@ const brands = [brand1, brand6, brand3, brand4, brand5, brand2, brand7];
 export const ClientLogos = () => {
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <h1 className="text-2xl font-bold text-center mb-6 mt-10 md:mt-20">
+      <h1 className="text-2xl md:text-3xl font-extrabold text-center mb-6 mt-10 md:mt-20 text-primary">
         We've helped thousands of sales teams
       </h1>
       <Marquee pauseOnHover speed={50} gradient={false}>
