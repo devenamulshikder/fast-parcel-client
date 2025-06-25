@@ -7,3 +7,4 @@ export { ClientLogos } from "./clientLogos/ClientLogos";
 export { ServicesSection } from "./servicesSection/ServicesSection";
 export { BeMerchant } from "./beMerchant/BeMerchant";
 export { TestimonialCarousel } from "./testimonialCarousel/TestimonialCarousel";
+export { FAQSection } from "./FAQSection/FAQSection";

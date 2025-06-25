@@ -2,6 +2,7 @@ import {
   Banner,
   BeMerchant,
   ClientLogos,
+  FAQSection,
   HowItWorks,
   OurServices,
   ServicesSection,
@@ -18,6 +19,7 @@ export const Home = () => {
       <ServicesSection />
       <BeMerchant />
       <TestimonialCarousel />
+      <FAQSection/>
     </div>
   );
 };
