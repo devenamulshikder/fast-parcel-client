@@ -6,3 +6,4 @@ export { OurServices } from "./ourServices/OurServices";
 export { ClientLogos } from "./clientLogos/ClientLogos";
 export { ServicesSection } from "./servicesSection/ServicesSection";
 export { BeMerchant } from "./beMerchant/BeMerchant";
+export { TestimonialCarousel } from "./testimonialCarousel/TestimonialCarousel";

@@ -5,6 +5,7 @@ import {
   HowItWorks,
   OurServices,
   ServicesSection,
+  TestimonialCarousel,
 } from "../../components";
 
 export const Home = () => {
@@ -16,6 +17,7 @@ export const Home = () => {
       <ClientLogos />
       <ServicesSection />
       <BeMerchant />
+      <TestimonialCarousel />
     </div>
   );
 };
