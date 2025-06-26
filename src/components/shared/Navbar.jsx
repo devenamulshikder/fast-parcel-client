@@ -147,7 +147,7 @@ export const Navbar = () => {
         </div>
         <div className="navbar-end text-lg gap-3 mr-3 md:gap-6 md:mr-6">
           <NavLink
-            to="/register"
+            to="/login"
             className={({ isActive }) =>
               isActive
                 ? "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
