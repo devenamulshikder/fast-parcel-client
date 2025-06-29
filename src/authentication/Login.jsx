@@ -118,9 +118,9 @@ const Login = () => {
 
             <p className="text-start text-[#71717A] text-sm mt-4 font-medium">
               Don't have any account?{" "}
-              <a href="#" className="text-[#8FA748] hover:underline">
+              <Link to="/register" className="text-[#8FA748] hover:underline">
                 Register
-              </a>
+              </Link>
             </p>
 
             <div className="relative flex items-center justify-center my-6">
