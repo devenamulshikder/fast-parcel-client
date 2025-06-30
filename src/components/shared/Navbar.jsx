@@ -45,7 +45,7 @@ export const Navbar = () => {
                 Services
               </NavLink>
               <NavLink
-                to="/allRecipes"
+                to="/coverage"
                 className={({ isActive }) =>
                   isActive
                     ? "text-[#CAEB66] text-lg hover:bg-transparent border-0"
@@ -102,7 +102,7 @@ export const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 flex gap-7 text-lg items-center">
             <NavLink
-              to="/fdsaf"
+              to="/"
               className={({ isActive }) =>
                 isActive
                   ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
@@ -112,7 +112,7 @@ export const Navbar = () => {
               Services
             </NavLink>
             <NavLink
-              to="/"
+              to="/coverage"
               className={({ isActive }) =>
                 isActive
                   ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"

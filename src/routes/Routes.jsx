@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../layouts/Root";
-import { ErrorPage, Home } from "../pages";
+import { Coverage, ErrorPage, Home } from "../pages";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "/coverage",
+
+        element: (
+          <PrivateRoute>
+            <Coverage />
+          </PrivateRoute>
+        ),
+        loader: () => fetch("/serviceCenter.json"),
       },
     ],
   },
