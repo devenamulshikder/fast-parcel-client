@@ -8,3 +8,4 @@ export { ServicesSection } from "./servicesSection/ServicesSection";
 export { BeMerchant } from "./beMerchant/BeMerchant";
 export { TestimonialCarousel } from "./testimonialCarousel/TestimonialCarousel";
 export { FAQSection } from "./FAQSection/FAQSection";
+export { Loader } from "./shared/Loader";
