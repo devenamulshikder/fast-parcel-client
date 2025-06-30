@@ -1,19 +1,45 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const authData = {
-    user,
-    setUser,
-    loading,
-    setLoading,
-    error,
-    setError,
+
+  // create user with email and pass
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  // sign in user
+  const signInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // sign in with google
+  const googleProvider = new GoogleAuthProvider();
+  const googleLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  // sign out user
+  const logOutUser = () => {
+    setLoading(true);
+    return signOut(auth);
   };
 
   useEffect(() => {
@@ -25,6 +51,19 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+
+  const authData = {
+    user,
+    setUser,
+    loading,
+    setLoading,
+    error,
+    setError,
+    createUser,
+    signInUser,
+    logOutUser,
+    googleLogin,
+  };
 
   return (
     <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>

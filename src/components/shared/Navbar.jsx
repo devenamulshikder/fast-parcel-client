@@ -1,5 +1,11 @@
+import { use } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../provider/AuthProvider";
 export const Navbar = () => {
+  const {user, logOutUser} = use(AuthContext)
+  const handleLogOut = ()=>{
+    logOutUser()
+  }
   return (
     <div className="bg-[#FFFFFF] shadow-sm top-0 sticky z-50 mt-5 container mx-auto rounded-2xl p-2">
       <div className="navbar">
@@ -146,16 +152,35 @@ export const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end text-lg gap-3 mr-3 md:gap-6 md:mr-6">
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
-                : "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
-            }
-          >
-            Sign In
-          </NavLink>
+          {!user ? (
+            <>
+              {" "}
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
+                    : "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
+                }
+              >
+                Sign In
+              </NavLink>
+            </>
+          ) : (
+            <>
+              {" "}
+              <NavLink
+              onClick={handleLogOut}
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
+                    : "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
+                }
+              >
+                Sign Out
+              </NavLink>
+            </>
+          )}
           <NavLink
             to="/register"
             className={({ isActive }) =>

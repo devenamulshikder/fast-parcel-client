@@ -1,17 +1,41 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { FaSpinner } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router";
 import authImage from "../assets/authImage.png";
+import { use } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { signInUser, loading, setLoading, googleLogin } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const onSubmit = (data) => {
     console.log("Login data:", data);
+    signInUser(data?.email, data?.password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Sign in user successful!");
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   const handleGoogleLogin = () => {
-    console.log("Initiating Google Login...");
+    googleLogin()
+      .then(() => {
+        toast.success("Google login successful!");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setLoading(false);
+      });
   };
   return (
     <div>
@@ -107,12 +131,17 @@ const Login = () => {
                   Forgot Password?
                 </a>
               </div>
-
               <button
                 type="submit"
                 className="w-full bg-[#CAEB66] cursor-pointer py-2 px-4 rounded-md hover:bg-[#e4eb66] focus:outline-none focus:ring-2 focus:ring-[#CBD5E1] focus:ring-opacity-50 transition duration-300"
               >
-                Login
+                {loading ? (
+                  <span className="flex justify-center items-center">
+                    <FaSpinner className="animate-spin" />
+                  </span>
+                ) : (
+                  'Login'
+                )}
               </button>
             </form>
 

@@ -1,23 +1,47 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import authImage from "../assets/authImage.png";
+import { use } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
+import { FaSpinner } from "react-icons/fa";
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUser, loading, setLoading, googleLogin } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const onSubmit = (data) => {
     console.log("Login data:", data);
+    createUser(data?.email, data?.password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Registration successful!");
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   const handleGoogleLogin = () => {
-    console.log("Initiating Google Login...");
+    googleLogin()
+      .then(() => {
+        toast.success("Google login successful!");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setLoading(false)
+      });
   };
   return (
     <div>
       <div className="flex bg-[#fff]">
         <div className="flex-1 my-auto">
-          <div className="flex ml-4 md:ml-12 md:-mt-20 pb-12">
+          <div className="flex ml-4 md:ml-12 md:-mt-10 pb-12">
             <Link to="/" className="flex items-center">
               <img
                 src="https://i.postimg.cc/rsqVtM6T/logo.png"
@@ -31,7 +55,7 @@ const Register = () => {
           </div>
           <div className="w-full md:w-1/2 p-8 flex flex-col justify-center mx-auto">
             <div className="mb-6">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-[#000000] mb-2">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#000000] mb-2">
                 Create an Account
               </h2>
               <p className="text-[#000000]">Register with Profast</p>
@@ -146,7 +170,13 @@ const Register = () => {
                 type="submit"
                 className="w-full bg-[#CAEB66] cursor-pointer py-2 px-4 rounded-md hover:bg-[#e4eb66] focus:outline-none focus:ring-2 focus:ring-[#CBD5E1] focus:ring-opacity-50 transition duration-300"
               >
-                Login
+                {loading ? (
+                  <span className="flex justify-center items-center">
+                    <FaSpinner className="animate-spin" />
+                  </span>
+                ) : (
+                  "Register"
+                )}
               </button>
             </form>
 
