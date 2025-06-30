@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
+import { motion } from "framer-motion";
 export const Navbar = () => {
-  const {user, logOutUser} = use(AuthContext)
-  const handleLogOut = ()=>{
-    logOutUser()
-  }
+  const { user, logOutUser } = use(AuthContext);
+  const handleLogOut = () => {
+    logOutUser();
+  };
   return (
     <div className="bg-[#FFFFFF] shadow-sm top-0 sticky z-50 mt-5 container mx-auto rounded-2xl p-2">
       <div className="navbar">
@@ -103,7 +105,7 @@ export const Navbar = () => {
               to="/fdsaf"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#b5d654] text-lg hover:bg-transparent border-b-2 border-0"
+                  ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
                   : " text-[#606060] font-medium"
               }
             >
@@ -113,7 +115,7 @@ export const Navbar = () => {
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#b5d654] text-lg hover:bg-transparent border-b-2 border-0"
+                  ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
                   : " text-[#606060] font-medium"
               }
             >
@@ -123,7 +125,7 @@ export const Navbar = () => {
               to="/allRecipes"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#b5d654] text-lg hover:bg-transparent border-b-2 border-0"
+                  ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
                   : " text-[#606060] font-medium"
               }
             >
@@ -133,7 +135,7 @@ export const Navbar = () => {
               to="/addRecipe"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#b5d654] text-lg hover:bg-transparent border-b-2 border-0"
+                  ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
                   : " text-[#606060] font-medium"
               }
             >
@@ -143,7 +145,7 @@ export const Navbar = () => {
               to="/myRecipes"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#b5d654] text-lg hover:bg-transparent border-b-2 border-0"
+                  ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
                   : " text-[#606060] font-medium"
               }
             >
@@ -169,16 +171,13 @@ export const Navbar = () => {
           ) : (
             <>
               {" "}
-              <NavLink
-              onClick={handleLogOut}
-                className={({ isActive }) =>
-                  isActive
-                    ? "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
-                    : "bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
-                }
+              <motion.button
+                whileTap={{ scale: 0.85 }}
+                onClick={handleLogOut}
+                className="bg-[#FFFFFF] border border-[#DADADA] px-4 py-2 rounded-xl font-bold text-[#606060]"
               >
                 Sign Out
-              </NavLink>
+              </motion.button>
             </>
           )}
           <NavLink
