@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import { use, useState } from "react";
-import { useRegionWarehouses } from "../../hooks/useRegionWarehouses";
 import { regionData } from "./data/regionData";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useRegionWarehouses } from "../../hooks/useRegionWarehouses";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 export const SendParcel = () => {
   const { user } = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const {
     senderWarehouses,
     receiverWarehouses,
@@ -99,16 +101,24 @@ export const SendParcel = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("Proceeding to payment:", parcelData);
+        axiosSecure.post("/parcels", parcelData).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Redirecting...",
+              text: "Proceeding to payment gateway.",
+              icon: "success",
+              timer: 1500,
+              showConfirmButton: false,
+            });
+          }
+        });
+        // console.log("Proceeding to payment:", parcelData);
         reset();
       } else {
         console.log("Editing parcel again.");
       }
     });
   };
-  
-  
-  
 
   return (
     <div className="container mx-auto px-4 py-10 md:px-24 md:py-16 bg-white rounded-3xl my-5 md:my-12 shadow-md">
