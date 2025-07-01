@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../layouts/Root";
-import { Coverage, ErrorPage, Home } from "../pages";
+import { Coverage, ErrorPage, Home, SendParcel } from "../pages";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
@@ -25,6 +25,12 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: () => fetch("/serviceCenter.json"),
+      },
+      {
+        path: "/sendParcel",
+        element:<PrivateRoute>
+          <SendParcel/>
+        </PrivateRoute>
       },
     ],
   },

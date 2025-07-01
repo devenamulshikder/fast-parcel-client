@@ -74,6 +74,18 @@ export const Navbar = () => {
               >
                 Pricing
               </NavLink>
+              {user && (
+                <NavLink
+                  to="/sendParcel"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#CAEB66] text-lg hover:bg-transparent border-0"
+                      : " relative cursor-pointer text-[#606060]"
+                  }
+                >
+                  Send Parcel
+                </NavLink>
+              )}
               <NavLink
                 to="/sdfsd"
                 className={({ isActive }) =>
@@ -141,6 +153,18 @@ export const Navbar = () => {
             >
               Pricing
             </NavLink>
+            {user && (
+              <NavLink
+                to="/sendParcel"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
+                    : " text-[#606060] font-medium"
+                }
+              >
+                Send Parcel
+              </NavLink>
+            )}
             <NavLink
               to="/myRecipes"
               className={({ isActive }) =>
