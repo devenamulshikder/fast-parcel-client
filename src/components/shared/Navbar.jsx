@@ -175,6 +175,19 @@ export const Navbar = () => {
             >
               Be a Rider
             </NavLink>
+
+            {user && (
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"
+                    : " text-[#606060] font-medium"
+                }
+              >
+                Dashboard
+              </NavLink>
+            )}
           </ul>
         </div>
         <div className="navbar-end text-lg gap-3 mr-3 md:gap-6 md:mr-6">

@@ -5,6 +5,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
 import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -28,15 +29,18 @@ export const router = createBrowserRouter([
       },
       {
         path: "/sendParcel",
-        element:<PrivateRoute>
-          <SendParcel/>
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <SendParcel />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "/",
     Component: AuthLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/login",
@@ -45,6 +49,22 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+    ],
+  },
+
+  // dashboard
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/dashboard/home",
       },
     ],
   },
