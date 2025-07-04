@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 
 const DashboardLayout = () => {
   return (
@@ -30,7 +30,9 @@ const DashboardLayout = () => {
           </div>
           <div className="">Dashboard</div>
         </div>
-
+        <div className=" text-3xl md:text-6xl text-primary text-center my-2 md:my-10 font-extrabold">
+          <h1>Dashboard</h1>
+        </div>
         <Outlet />
       </div>
       <div className="drawer-side bg-amber-500 w-2/3">
@@ -41,10 +43,10 @@ const DashboardLayout = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           <li>
-            <a>Sidebar Item 1</a>
+            <Link>My Parcels</Link>
           </li>
           <li>
-            <a href="/">Sidebar Item 2</a>
+            <Link to={"/another"}>Another Parcels</Link>
           </li>
         </ul>
       </div>
