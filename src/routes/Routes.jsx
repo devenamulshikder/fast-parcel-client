@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../layouts/Root";
-import { Coverage, ErrorPage, Home, SendParcel } from "../pages";
+import { Coverage, ErrorPage, Home, MyParcel, SendParcel } from "../pages";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
@@ -61,10 +61,10 @@ export const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
-    errorElement: <ErrorPage />,
     children: [
       {
-        path: "/dashboard/home",
+        index: true, 
+        element: <MyParcel/>
       },
     ],
   },

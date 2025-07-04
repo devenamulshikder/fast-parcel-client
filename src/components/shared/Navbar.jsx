@@ -96,6 +96,18 @@ export const Navbar = () => {
               >
                 Be a Rider
               </NavLink>
+              {user && (
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#CAEB66] text-lg hover:bg-transparent border-0"
+                      : " relative cursor-pointer text-[#606060]"
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              )}
             </ul>
           </div>
           <div className="navbar-start hidden lg:flex">
