@@ -61,11 +61,11 @@ export const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
-        index: true, 
-        element: <MyParcel/>
+        path: "/dashboard/parcels",
+        element: <MyParcel />,
       },
     ],
   },
