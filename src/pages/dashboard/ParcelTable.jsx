@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { FaTrash, FaEye, FaMoneyCheckAlt } from "react-icons/fa";
+import { FaTrash, FaMoneyCheckAlt, FaEdit } from "react-icons/fa";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 
@@ -34,8 +34,8 @@ const ParcelTable = ({ parcels, onView, onPay, onDelete }) => {
       className="overflow-x-auto bg-white rounded-2xl shadow-xl p-6 border border-gray-100"
     >
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-        <h2 className="text-3xl font-bold text-gradient bg-gradient-to-r from-[#CBEC67] to-[#d2e98d] bg-clip-text text-transparent">
-          Your Parcels
+        <h2 className="text-3xl font-bold text-gradient  text-primary">
+          Your Parcels!
         </h2>
         <div className="mt-2 md:mt-0 text-sm text-gray-500">
           {parcels?.length || 0} parcel{parcels?.length !== 1 ? "s" : ""} total
@@ -171,9 +171,9 @@ const ParcelTable = ({ parcels, onView, onPay, onDelete }) => {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => onView(parcel)}
                         className="p-2 cursor-pointer rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
-                        title="View Details"
+                        title="Edit Parcel"
                       >
-                        <FaEye className="w-4 h-4" />
+                        <FaEdit className="w-4 h-4" />
                       </motion.button>
                       <motion.button
                         whileHover={{ scale: 1.05 }}

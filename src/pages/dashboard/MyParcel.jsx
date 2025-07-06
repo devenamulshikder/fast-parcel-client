@@ -1,14 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { use } from "react";
+import { use, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Loader } from "../../components";
 import ParcelTable from "./ParcelTable";
 import Swal from "sweetalert2";
+import UpdateParcelModal from "../../modal/UpdateParcelModal";
 
 export const MyParcel = () => {
   const { user } = use(AuthContext);
   const axiosSecure = useAxiosSecure();
+  const [selectedParcel, setSelectedParcel] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
   const {
     data: parcels = [],
     isPending,
@@ -20,12 +24,14 @@ export const MyParcel = () => {
       return res.data;
     },
   });
-  console.log(parcels);
+
   if (isPending) {
     return <Loader />;
   }
+
   const handleView = (parcel) => {
-    console.log("View Details:", parcel);
+    setSelectedParcel(parcel);
+    setIsUpdateModalOpen(true);
   };
 
   const handlePay = (parcel) => {
@@ -62,8 +68,31 @@ export const MyParcel = () => {
         }
       }
     });
-    console.log("Delete Parcel ID:", id);
   };
+
+  const handleUpdate = async (updatedData) => {
+    try {
+      const res = await axiosSecure.patch(
+        `/parcels/${selectedParcel._id}`,
+        updatedData
+      );
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Updated!",
+          text: "Parcel information has been updated.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        refetch();
+        setIsUpdateModalOpen(false);
+      }
+    } catch (err) {
+      console.error("Update error:", err);
+      Swal.fire("Error!", "Failed to update parcel.", "error");
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4">
       <ParcelTable
@@ -72,6 +101,14 @@ export const MyParcel = () => {
         onPay={handlePay}
         onDelete={handleDelete}
       />
+
+      {isUpdateModalOpen && (
+        <UpdateParcelModal
+          parcel={selectedParcel}
+          onClose={() => setIsUpdateModalOpen(false)}
+          onUpdate={handleUpdate}
+        />
+      )}
     </div>
   );
 };
