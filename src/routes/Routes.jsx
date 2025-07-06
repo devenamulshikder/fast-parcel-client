@@ -6,6 +6,7 @@ import Login from "../authentication/Login";
 import Register from "../authentication/Register";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardOverview from "../pages/dashboard/DashboardOverview";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
+      {
+        index:true,
+        element: <DashboardOverview/>,
+      },
       {
         path: "/dashboard/parcels",
         element: <MyParcel />,
