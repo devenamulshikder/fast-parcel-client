@@ -3,8 +3,6 @@ import {
   FiX,
   FiPackage,
   FiUser,
-  FiMapPin,
-  FiPhone,
   FiEdit2,
 } from "react-icons/fi";
 import Swal from "sweetalert2";

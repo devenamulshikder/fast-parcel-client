@@ -7,6 +7,7 @@ import Register from "../authentication/Register";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardOverview from "../pages/dashboard/DashboardOverview";
+import Payment from "../pages/dashboard/payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -65,12 +66,16 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index:true,
-        element: <DashboardOverview/>,
+        index: true,
+        element: <DashboardOverview />,
       },
       {
         path: "/dashboard/parcels",
         element: <MyParcel />,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment />,
       },
     ],
   },

@@ -6,13 +6,14 @@ import { Loader } from "../../components";
 import ParcelTable from "./ParcelTable";
 import Swal from "sweetalert2";
 import UpdateParcelModal from "../../modal/UpdateParcelModal";
+import { useNavigate } from "react-router";
 
 export const MyParcel = () => {
   const { user } = use(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [selectedParcel, setSelectedParcel] = useState(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-
+  const navigate = useNavigate()
   const {
     data: parcels = [],
     isPending,
@@ -35,7 +36,8 @@ export const MyParcel = () => {
   };
 
   const handlePay = (parcel) => {
-    console.log("Initiate Payment:", parcel);
+    navigate(`/dashboard/payment/${parcel._id}`);
+
   };
 
   const handleDelete = (id) => {
