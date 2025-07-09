@@ -3,14 +3,33 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { FiCreditCard, FiLock, FiCheckCircle, FiXCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router";
+import { Link, useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Loader } from "../../../components";
 
-const PaymentForm = ({ amount, onPaymentSuccess }) => {
+const PaymentForm = ({ onPaymentSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
+
+  const { isPending, data: parcelInfo = {} } = useQuery({
+    queryKey: ["parcels", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/parcels/${id}`);
+      return res.data;
+    },
+  });
+  if (isPending) {
+    <Loader />;
+  }
+
+  const amount = parcelInfo.totalCost;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
@@ -33,7 +52,6 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
         return;
       }
 
-
       // Here you would typically send paymentMethod.id to your backend
       // For this example, we'll simulate a successful payment
       setTimeout(() => {
@@ -41,7 +59,7 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
         setSucceeded(true);
         if (onPaymentSuccess) onPaymentSuccess(paymentMethod);
       }, 1500);
-      console.log('paymentMethod', paymentMethod);
+      console.log("paymentMethod", paymentMethod);
     } catch (err) {
       setError(err.message);
       setProcessing(false);
@@ -136,8 +154,10 @@ const PaymentForm = ({ amount, onPaymentSuccess }) => {
             <button
               type="submit"
               disabled={!stripe || processing}
-              className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-colors ${
-                processing ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"
+              className={`w-full py-3 px-4 rounded-lg font-medium text-primary transition-colors ${
+                processing
+                  ? "bg-[#b5d654ca]"
+                  : "bg-[#b5d654] hover:bg-[#b5d654ca]"
               } flex items-center justify-center`}
             >
               {processing ? (
