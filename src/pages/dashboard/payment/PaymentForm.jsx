@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { use, useState } from "react";
 import { FiCreditCard, FiLock, FiCheckCircle, FiXCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Loader } from "../../../components";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const PaymentForm = ({ onPaymentSuccess }) => {
+  const { user } = use(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -29,6 +32,8 @@ const PaymentForm = ({ onPaymentSuccess }) => {
   }
 
   const amount = parcelInfo.totalCost;
+
+  const amountInCents = amount * 100;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,15 +56,47 @@ const PaymentForm = ({ onPaymentSuccess }) => {
         setProcessing(false);
         return;
       }
-
       // Here you would typically send paymentMethod.id to your backend
+      // payment intent
+      const res = await axiosSecure.post("/create-payment-intent", {
+        amountInCents,
+        id,
+      });
+      const clientSecret = res.data.clientSecret;
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: user.displayName,
+            email: user.email,
+          },
+        },
+      });
+
+      if (result.error) {
+        toast.error(result.error.message);
+      } else {
+        if (result.paymentIntent.status === "succeeded") {
+          const paymentData = {
+            id,
+            email: user.email,
+            amount,
+            transactionId: result.paymentIntent.id,
+            paymentMethod: result.paymentIntent.payment_method_types,
+          };
+          const paymentRes = await axiosSecure.post("/payments", paymentData);
+          if (paymentRes.data.insertedId) {
+            toast.success("payment successfully!");
+          }
+        }
+      }
+
       // For this example, we'll simulate a successful payment
       setTimeout(() => {
         setProcessing(false);
         setSucceeded(true);
         if (onPaymentSuccess) onPaymentSuccess(paymentMethod);
       }, 1500);
-      console.log("paymentMethod", paymentMethod);
     } catch (err) {
       setError(err.message);
       setProcessing(false);
