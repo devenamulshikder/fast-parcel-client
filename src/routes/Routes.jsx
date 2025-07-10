@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardOverview from "../pages/dashboard/DashboardOverview";
 import Payment from "../pages/dashboard/payment/Payment";
+import PaymentHistory from "../pages/dashboard/paymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         element: <Payment />,
+      },
+      {
+        path: "/dashboard/paymentHistory",
+        element:<PaymentHistory/>
       },
     ],
   },

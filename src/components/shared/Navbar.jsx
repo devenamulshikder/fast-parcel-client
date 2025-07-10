@@ -239,8 +239,23 @@ export const Navbar = () => {
           >
             Be a rider
           </NavLink>
-          <div className="p-1 hidden md:flex rounded-full bg-black md:-ml-5">
-            <img src="https://i.postimg.cc/mDhXdmPK/arrow.png" alt="" />
+          <div className="p-0.5 hidden md:flex rounded-full bg-black md:-ml-5">
+            {user ? (
+              <>
+                {" "}
+                <img
+                  className="rounded-full w-10"
+                  referrerPolicy="no-referrer"
+                  src={user && user?.photoURL}
+                  alt=""
+                />
+              </>
+            ) : (
+              <>
+                {" "}
+                <img src="https://i.postimg.cc/mDhXdmPK/arrow.png" alt="" />
+              </>
+            )}
           </div>
         </div>
       </div>

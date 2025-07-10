@@ -10,9 +10,20 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
+import { use } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const DashboardLayout = () => {
+  const { user, logOutUser } = use(AuthContext);
   const location = useLocation();
+
+  const handleLogout = () => {
+    logOutUser()
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // Navigation items
   const navItems = [
@@ -22,7 +33,11 @@ const DashboardLayout = () => {
       name: "My Parcels",
       icon: <FiPackage size={20} />,
     },
-    { path: "/dashboard/team", name: "Team", icon: <FiUsers size={20} /> },
+    {
+      path: "/dashboard/paymentHistory",
+      name: "Payment History",
+      icon: <FiUsers size={20} />,
+    },
     {
       path: "/dashboard/reports",
       name: "Reports",
@@ -117,15 +132,18 @@ const DashboardLayout = () => {
               <div className="flex items-center">
                 <div className="avatar placeholder">
                   <div className="bg-neutral text-neutral-content rounded-full w-10">
-                    <span>JP</span>
+                    <img referrerPolicy="no-referrer" src={user && user?.photoURL} alt="" />
                   </div>
                 </div>
                 <div className="ml-3">
-                  <p className="font-medium">John Parker</p>
+                  <p className="font-medium">{user && user?.displayName}</p>
                   <p className="text-sm text-gray-500">Admin</p>
                 </div>
               </div>
-              <button className="btn btn-ghost btn-sm text-gray-500 hover:text-gray-700">
+              <button
+                onClick={handleLogout}
+                className="btn btn-ghost btn-sm text-gray-500 hover:text-gray-700"
+              >
                 <FiLogOut size={18} />
               </button>
             </div>
