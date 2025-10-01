@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../layouts/Root";
-import { Coverage, ErrorPage, Home, MyParcel, SendParcel } from "../pages";
+import { AboutUs, Coverage, ErrorPage, Home, MyParcel, SendParcel } from "../pages";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
@@ -38,6 +38,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/aboutUs",
+        Component: AboutUs
+      }
     ],
   },
   {

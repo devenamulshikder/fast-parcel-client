@@ -65,7 +65,7 @@ export const Navbar = () => {
                 About Us
               </NavLink>
               <NavLink
-                to="/sdfsd"
+                to="/aboutUs"
                 className={({ isActive }) =>
                   isActive
                     ? "text-[#CAEB66] text-lg hover:bg-transparent border-0"
@@ -146,7 +146,7 @@ export const Navbar = () => {
               Coverage
             </NavLink>
             <NavLink
-              to="/allRecipes"
+              to="/aboutUs"
               className={({ isActive }) =>
                 isActive
                   ? "text-secondary text-lg bg-[#b5d654] rounded-3xl py-0.5 px-3"

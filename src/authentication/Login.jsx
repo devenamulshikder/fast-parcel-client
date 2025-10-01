@@ -15,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const onSubmit = (data) => {
-    console.log("Login data:", data);
     signInUser(data?.email, data?.password)
       .then((result) => {
         console.log(result.user);
